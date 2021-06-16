@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>入荷管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>入荷管理画面</h1>
+<div th:if="${resultText == null}">
+	<h4>入荷確定情報を入力してください。</h4>
+</th:if>
+</div>
+<div th:if="${resultText != null}">
+	<h4 th:text="${resultText}"></h4>
+</th:if>
+</div>
+	
+	<h4>入荷確定情報更新</h4>
+	<form method="POST" action="ArrivalDateUpdate">
+		<input type="text" name="itemNo" placeholder="入荷番号" required/>
+		　<input type="submit" value="入荷確定">
+		<input type="hidden" name="searchItemName" th:value="${searchItemName}">
+		<input type="hidden" name="selectBtn" th:value="${selectBtn}"/>
+		<input type="hidden" name="search" th:value="${search}"/>
+	</form>
+	
+	<br>
+	<hr width="100%" size="3" noshade>
+	
+	<h4>入荷情報検索</h4>
+	<form method="POST" action="ArrivalDataSearch">
+		<button type="submit" name="selectBtn" value="beforeArrival">入荷前</button>
+		<button type="submit" name="selectBtn" value="available">入荷済み</button>
+	</form>
+	<br>
+	<form method="POST" action="ArrivalDataKeywordSearch">
+		<input type="text" name="searchItemName" placeholder="商品名" th:value="${searchItemName}" required/>
+		　<input type="submit" value="検索"/>
+	</form>
+	<br>
+	
+<div th:if="${searchList != null}">
+	<details align="center">
+	<summary>入荷情報一覧表</summary>
+	
+	<table border="1" align="center">
+		<tr>
+			<th>入荷番号</th>
+			<th>商品名</th>
+			<th>商品コード</th>
+			<th>発注数</th>
+			<th>入荷予定日</th>
+			<th>入荷日</th>
+		</tr>
+		<tr th:each="data : ${searchList}" th:object="${data}">
+			<td th:text="*{vender_order_no}"/></td>
+			<td th:text="*{item_name}"/></td>
+			<td th:text="*{item_product_no}"/></td>
+			<td th:text="*{item_buy_count}"/></td>
+			<td th:text="*{arrival_due_date}"/></td>
+			<td th:text="*{arrival_date}"/></td>
+		</tr>
+		</th:each>
+	</table>
+</th:if>
+</details>
+</div>	
+	
+	<form action="#" th:action="@{/logout}" method="post">
+    <input type="submit" value="logout">
+	</form>
+
+</body>
+</html>
