@@ -52,6 +52,18 @@ class LoginControllerTest {
 		 		.andExpect(view().name(name));
 	 }
 
+	 /*ログイン機能のテスト*/
+	 @Test
+	 public void Testload() throws Exception {
+		 String postname = "/logout";
+		 String name = "html/Login";
+
+
+
+		mockMvc.perform(post(postname))
+		 		.andExpect(view().name(name));
+	 }
+
 
 
 
