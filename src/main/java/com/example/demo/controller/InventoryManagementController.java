@@ -193,6 +193,7 @@ public class InventoryManagementController {
   				model.addAttribute("searchList", returnList);
   			}
   			model.addAttribute("resultText", "更新しました！");
+  			System.out.println(model);
   			return "html/InventoryAdjustment";
   		}
 
