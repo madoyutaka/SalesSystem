@@ -22,9 +22,6 @@ public class LoginController {
 	 @Autowired
 	 HttpSession session;
 
-	 @Autowired
-	 UserLogic userlogic;
-
 	/*ログイン画面へ遷移*/
     @RequestMapping(path ="/", method = RequestMethod.GET)
     public String index1(Model model) {
@@ -51,6 +48,9 @@ public class LoginController {
         return "html/Login";
     }
 
+    @Autowired
+    UserLogic userlogic;
+
 	 /*管理者メニュー画面へ遷移*/
    @PostMapping("ManagerMenu")
    String postResult(@RequestParam("username") String id,@RequestParam("password") String pass, Model model) {
@@ -67,7 +67,6 @@ public class LoginController {
    }
 
     //ログアウトする際にSessionを切る
-   //ログアウトする際にSessionを切る
     @PostMapping(value = "logout")
     public String load() {
      userlogic.logout();

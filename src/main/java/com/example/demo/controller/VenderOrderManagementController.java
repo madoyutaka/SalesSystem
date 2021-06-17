@@ -20,10 +20,10 @@ public class VenderOrderManagementController {
 	private VenderOrderLogic venderOrderLogic;
 
 	@Autowired
-	private ItemLogic itemLogic;
+	private ItemJdbc itemJdbc;
 
 	@Autowired
-	private ItemJdbc itemJdbc;
+	private ItemLogic itemLogic;
 
 	//ページを表示
 	@RequestMapping("VenderOrderInput")
