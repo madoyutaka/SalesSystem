@@ -5,29 +5,49 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>入荷管理画面</h1>
-<div th:if="${resultText == null}">
-	<h4>入荷確定情報を入力してください。</h4>
-</th:if>
-</div>
-<div th:if="${resultText != null}">
-	<h4 th:text="${resultText}"></h4>
-</th:if>
-</div>
-	
-	<h4>入荷確定情報更新</h4>
-	<form method="POST" action="ArrivalDateUpdate">
+
+<header class="header">
+
+       <div class="header_wrap">
+       	<h1 class="header_ttl">入荷管理画面</h1>
+
+		<nav  class="header_nav">
+			<ul  class="header_ul">
+				<li  class="header_li">
+					<form class="manager_menu"action="#" th:action="@{/BackManager}" method="post">
+				     	<input type="submit" value="管理者メニューへ">
+				   </form>
+				</li>
+
+				<li  class="header_li">
+					<form action="#" th:action="@{/logout}" method="post">
+					    <input type="submit" value="ログアウト">
+					</form>
+				</li>
+			</ul>
+	      </nav>
+	</div>
+</header>
+
+<form method="POST" action="ArrivalDateUpdate">
 		<input type="text" name="itemNo" placeholder="入荷番号" required/>
 		　<input type="submit" value="入荷確定">
 		<input type="hidden" name="searchItemName" th:value="${searchItemName}">
 		<input type="hidden" name="selectBtn" th:value="${selectBtn}"/>
 		<input type="hidden" name="search" th:value="${search}"/>
 	</form>
-	
+
 	<br>
 	<hr width="100%" size="3" noshade>
-	
-	<h4>入荷情報検索</h4>
+
+	<div th:if="${searchResultText != null}">
+		<h4 th:text="'入荷情報検索　'+${searchResultText}"></h4>
+	</th:if>
+	</div>
+	<div th:if="${searchResultText == null}">
+		<h4>入荷情報検索</h4>
+	</th:if>
+	</div>
 	<form method="POST" action="ArrivalDataSearch">
 		<button type="submit" name="selectBtn" value="beforeArrival">入荷前</button>
 		<button type="submit" name="selectBtn" value="available">入荷済み</button>
@@ -38,11 +58,11 @@
 		　<input type="submit" value="検索"/>
 	</form>
 	<br>
-	
+
 <div th:if="${searchList != null}">
 	<details align="center">
 	<summary>入荷情報一覧表</summary>
-	
+
 	<table border="1" align="center">
 		<tr>
 			<th>入荷番号</th>
@@ -64,8 +84,8 @@
 	</table>
 </th:if>
 </details>
-</div>	
-	
+</div>
+
 	<form action="#" th:action="@{/logout}" method="post">
     <input type="submit" value="logout">
 	</form>

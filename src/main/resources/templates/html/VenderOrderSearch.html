@@ -3,9 +3,33 @@
 <head>
     <title>発注検索</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+     <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/System.css}" type="text/css">
 </head>
 <body>
-<h1>発注検索画面</h1>
+<header class="header">
+
+       <div class="header_wrap">
+       	<h1 class="header_ttl">発注検索画面</h1>
+
+		<nav  class="header_nav">
+			<ul  class="header_ul">
+				<li  class="header_li">
+					<form class="manager_menu"action="#" th:action="@{/BackManager}" method="post">
+				     	<input type="submit" value="管理者メニューへ">
+				   </form>
+				</li>
+
+				<li  class="header_li">
+					<form action="#" th:action="@{/logout}" method="post">
+					    <input type="submit" value="ログアウト">
+					</form>
+				</li>
+			</ul>
+	      </nav>
+	</div>
+</header>
+
 <div th:if="${resultText == null}">
 	<h4>商品名を入力してください。</h4>
 </th:if>
@@ -46,5 +70,6 @@
 <form action="#" th:action="@{/logout}" method="post">
     <input type="submit" value="logout">
 </form>
+
 </body>
 </html>

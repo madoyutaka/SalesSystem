@@ -31,10 +31,10 @@ public class InventoryManagementController {
 
 	@Autowired
 	private ClientOrderJdbc clientOrderJdbc;
-	
+
 	@Autowired
 	ItemLogic itemLogic;
-	
+
 	@Autowired
 	VenderOrderLogic venderOrderLogic;
 
@@ -105,7 +105,7 @@ public class InventoryManagementController {
 			model.addAttribute("resultText", "検索結果"+returnList.size()+"件");
 			return "html/InventoryAdjustment";
 		}
-	
+
 
 
 //出荷管理↓
@@ -116,8 +116,8 @@ public class InventoryManagementController {
 		model.addAttribute("clientOrderList",list);
 		return "html/ShipmentManagement";
 	}
-			    
-		
+
+
 	//商品名をデータベースと照合して受注情報を表示(フォーム)
 	@RequestMapping("ClientOrderSearchForm")
 	public String orderSearchForm(@RequestParam("searchWord") String searchWord, Model model){
@@ -150,8 +150,8 @@ public class InventoryManagementController {
 		model.addAttribute("resultText",resultText);
 		return "html/ShipmentManagement";
 	}
-		 	
-	
+
+
 	//出荷日の更新(出荷確定処理)
 	@RequestMapping("ShipmentDateUpdate")
 	public String shipmentDateUpdate(@RequestParam("client_order_no") String client_order_no,@RequestParam("searchWord") String searchWord, Model model){
@@ -176,8 +176,8 @@ public class InventoryManagementController {
 		return "html/ShipmentManagement";
 	}
 //出荷管理↑
-	
-		
+
+
   //在庫の更新
     @RequestMapping("InventryUpdate")
   		public String inventoryadjustmentupdate(@RequestParam("item_no") String searchWord, @RequestParam("item_stock") String updateStock,Model model)
@@ -196,12 +196,12 @@ public class InventoryManagementController {
   			return "html/InventoryAdjustment";
   		}
 
-	
+
     //入荷確定処理
     @RequestMapping("ArrivalDateUpdate")
     public String arrivalDueDateUpdate(@RequestParam("itemNo") String itemNo, @RequestParam("searchItemName") String searchItemName, @RequestParam("selectBtn") String selectBtn, @RequestParam("search") String search, Model model) {
     	System.out.println(search+"で検索。itemName："+searchItemName+"　btnName："+selectBtn);
-    	
+
     	//検索方法によって取得情報を変更する
     	ArrayList<VenderOrderModel> searchList = new ArrayList<VenderOrderModel>();
     	//キーワード検索
@@ -219,7 +219,7 @@ public class InventoryManagementController {
     	if(searchList.size()>0) {
     		model.addAttribute("searchList", searchList);
     	}
-    	
+
     	//intに変換可能か確認する
     	String noConfirmationStr = itemLogic.inputConfirmation(itemNo);
     	if(noConfirmationStr.equals("true")){
@@ -227,14 +227,14 @@ public class InventoryManagementController {
     		model.addAttribute("resultText", noConfirmationStr);
     		return "html/ArrivalManagement";
     	}
-    	
+
     	//入力された番号が存在するか、既に確定されているか確認し、入荷確定処理を行う。
     	String resultText = itemLogic.checkItemNoLogic(Integer.parseInt(itemNo));
     	model.addAttribute("resultText", resultText);
-    	
+
         return "html/ArrivalManagement";
     }
-    
+
     //検索機能
     @RequestMapping("ArrivalDataKeywordSearch")
     public String arrivalDateSearch(@RequestParam("searchItemName") String searchItemName, Model model) {
@@ -247,7 +247,7 @@ public class InventoryManagementController {
     	model.addAttribute("searchItemName", searchItemName);
     	return "html/ArrivalManagement";
     }
-    
+
     //入荷前、入荷済みボタン用。検索機能
     @RequestMapping("ArrivalDataSearch")
     public String arrivalDataSearchBtn(@RequestParam("selectBtn") String selectBtn, Model model) {

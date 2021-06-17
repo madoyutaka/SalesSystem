@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.model.LoginModel;
+
 /*見積管理関係のコントローラー*/
 @Controller
 public class QuotationManagementController  {
@@ -18,8 +20,14 @@ public class QuotationManagementController  {
 	 /*見積管理画面へ遷移*/
 	    @RequestMapping("QuotationManagement")
 	    public String quotation(Model model) {
+	    	if(session.getAttribute("data") == null) {
+	    		message ="IDとパスワードを入力してください";
+	    	    model.addAttribute("indexForm", new LoginModel());
+	    	    model.addAttribute("message" , message);
+	    	    return "Login";
+	    	}
 
-	        return "QuotationManagement";
+	        return "html/QuotationManagement";
 	    }
 
     /*Jdbcテンプレート*/

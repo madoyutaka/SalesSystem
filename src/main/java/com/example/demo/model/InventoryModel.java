@@ -9,7 +9,7 @@ public class InventoryModel {
 	String itemProductNo = null;
 	int itemPrice;
 	int itemStock;
-	
+
 
 	public int getItemNo() {
 		return itemNo;
@@ -18,7 +18,7 @@ public class InventoryModel {
 	public void setItemNo(int itemNo) {
 		this.itemNo = itemNo;
 	}
-	
+
 
 	public String getItemName() {
 		return itemName;
@@ -27,7 +27,7 @@ public class InventoryModel {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	
+
 
 	public String getItemProductNo() {
 		return itemProductNo;
@@ -36,7 +36,7 @@ public class InventoryModel {
 	public void setItemProductNo(String itemProductNo) {
 		this.itemProductNo = itemProductNo;
 	}
-	
+
 
 	public int getItemPrice() {
 		return itemPrice;
@@ -45,7 +45,7 @@ public class InventoryModel {
 	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
-	
+
 
 	public int getItemStock() {
 		return itemStock;
@@ -54,5 +54,5 @@ public class InventoryModel {
 	public void setItemStock(int itemStock) {
 		this.itemStock = itemStock;
 	}
-	
+
 }

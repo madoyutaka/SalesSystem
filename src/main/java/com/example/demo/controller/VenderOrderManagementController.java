@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.jdbc.ItemJdbc;
+import com.example.demo.logic.ItemLogic;
 import com.example.demo.logic.VenderOrderLogic;
 import com.example.demo.model.InventoryModel;
 import com.example.demo.model.VenderOrderModel;
@@ -17,10 +18,13 @@ import com.example.demo.model.VenderOrderModel;
 public class VenderOrderManagementController {
 	@Autowired
 	private VenderOrderLogic venderOrderLogic;
-	
+
 	@Autowired
 	private ItemJdbc itemJdbc;
-	
+
+	@Autowired
+	private ItemLogic itemLogic;
+
 	//ページを表示
 	@RequestMapping("VenderOrderInput")
 	public String venderOrderInputPage(Model model) {
@@ -44,13 +48,13 @@ public class VenderOrderManagementController {
     		model.addAttribute("resultText",retrunText);
 	        return "html/VenderOrderInput";
     	}
-		
+
 		int totalItemNo = itemJdbc.getItemDataList().size();
     	if(totalItemNo<no) {
     		model.addAttribute("resultText", "入力された番号は存在しません。");
     		return "html/VenderOrderInput";
     	}
-		
+
 		int totalPrice = venderOrderLogic.getVenderOrderTotalPrice(no, buyCount);
 		model.addAttribute("list", list);
 		if(totalPrice==-1) {
@@ -64,11 +68,11 @@ public class VenderOrderManagementController {
 		}
 		return "html/VenderOrderInput";
 	}
-	
+
 	//発注情報を保存する
 	@RequestMapping("VenderOrderSave")
 	public String venderOrderSave(@RequestParam("itemNo") int itemNo, @RequestParam("itemBuyCount") int itemBuyCount, @RequestParam("totalPrice") int totalPrice,Model model) {
-		
+
 		//保存するためのLogic
 		String resultText = venderOrderLogic.venderOrderSaveLogic(itemNo, itemBuyCount, totalPrice);
 		int checkItemTotalPrice = -10;
@@ -90,14 +94,14 @@ public class VenderOrderManagementController {
 		model.addAttribute("resultText", resultText);
 		return "html/VenderOrderInput";
 	}
-	
-	
+
+
 	//ページを表示
 	@RequestMapping("VenderOrderSearch")
 	public String venderOrderSearchPage(Model model) {
 		return "html/VenderOrderSearch";
 	}
-	
+
 	@RequestMapping("VenderOrderSearchResult")
 	public String venderOrderSearch(@RequestParam("searchWord") String searchWord, Model model) {
 		ArrayList<VenderOrderModel> returnList = venderOrderLogic.getVenderOrderLog(searchWord);
@@ -106,12 +110,10 @@ public class VenderOrderManagementController {
 			model.addAttribute("searchList", null);
 		}else{
 			model.addAttribute("searchList", returnList);
-		}	
+		}
 		model.addAttribute("resultText", "検索結果："+returnList.size()+"件");
 		model.addAttribute("searchWord", searchWord);
 		return "html/VenderOrderSearch";
 	}
-	
+
 }
-
-

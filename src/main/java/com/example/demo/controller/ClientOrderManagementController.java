@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.model.LoginModel;
+
 /*受注管理関係のコントローラー*/
 @Controller
 public class ClientOrderManagementController {
@@ -18,8 +20,14 @@ public class ClientOrderManagementController {
  /*受注管理画面へ遷移*/
     @RequestMapping("ClientOrderManagement")
     public String clientorder(Model model) {
+    	if(session.getAttribute("data") == null) {
+    		message ="IDとパスワードを入力してください";
+    	    model.addAttribute("indexForm", new LoginModel());
+    	    model.addAttribute("message" , message);
+    	    return "html/Login";
+    	}
 
-        return "ClientOrderManagement";
+        return "html/ClientOrderManagement";
     }
 
     /*Jdbcテンプレート*/

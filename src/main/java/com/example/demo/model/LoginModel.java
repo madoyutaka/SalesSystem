@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoginModel {
+
 	private String username;
 	private String password;
 
