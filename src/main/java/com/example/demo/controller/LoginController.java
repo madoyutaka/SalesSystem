@@ -22,6 +22,9 @@ public class LoginController {
 	 @Autowired
 	 HttpSession session;
 
+	 @Autowired
+	 UserLogic userlogic;
+
 	/*ログイン画面へ遷移*/
     @RequestMapping(path ="/", method = RequestMethod.GET)
     public String index1(Model model) {
@@ -47,9 +50,6 @@ public class LoginController {
         model.addAttribute("message" , message);
         return "html/Login";
     }
-
-    @Autowired
-    UserLogic userlogic;
 
 	 /*管理者メニュー画面へ遷移*/
    @PostMapping("ManagerMenu")
