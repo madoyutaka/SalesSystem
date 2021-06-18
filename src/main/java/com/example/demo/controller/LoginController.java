@@ -67,8 +67,6 @@ public class LoginController {
    }
 
     //ログアウトする際にSessionを切る
-	 //ログアウトする際にSessionを切る
-	 //ログアウトする際にSessionを切る
     @PostMapping(value = "logout")
     public String load() {
      userlogic.logout();
